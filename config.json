@@ -1,0 +1,17 @@
+{
+    "api": {
+        "base_url": "https://open.bigmodel.cn/api/paas/v4",
+        "model": "glm-4v-plus",
+        "timeout": 90,
+        "key": "YOUR_API_KEY",
+        "temperature": 0.8
+    },
+    "image": {
+        "max_size": 5,
+        "max_pixels": 6000
+    },
+    "video": {
+        "max_size": 20,
+        "max_duration": 30
+    }
+}
