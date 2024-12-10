@@ -242,12 +242,12 @@ class GLMVision(Plugin):
    发送"智谱识视频 [视频URL]"或"分析视频 [视频URL]"或"看视频 [视频URL]"
 
 图片要求：
-- 支持格式：jpg, jpeg, png, webp
+- 支持格式：jpg、png、jpeg
 - 大小限制：{}MB
 - 最大像素：{}像素
 
 视频要求：
-- 支持格式：mp4, avi, mov, mkv
+- 支持格式：mp4
 - 大小限制：{}MB
 - 时长限制：{}秒
 
