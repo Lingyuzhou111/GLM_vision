@@ -16,7 +16,7 @@ import cv2
 import numpy as np
 import tempfile
 
-@plugins.register(name="GLM_vision", desc="GLM-4V视觉模型插件", version="1.0", author="assistant")
+@plugins.register(name="GLM_vision", desc="GLM-4V视觉模型插件", version="1.0", author="Lingyuzhou")
 class GLMVision(Plugin):
     def __init__(self):
         super().__init__()
