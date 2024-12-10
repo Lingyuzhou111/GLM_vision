@@ -47,8 +47,12 @@ class GLMVision(Plugin):
             # 关键词
             self.keywords = {
                 "image": ["智谱识图", "分析图片", "看图"],
-                "video": ["智谱识视频", "分析视频", "看视频"]
+                "video": ["智谱识视频", "分析视频", "看视频"],
+                "switch_model": ["切换识图模型", "切换视觉模型"]
             }
+            
+            # 支持的模型列表
+            self.supported_models = ["glm-4v-plus", "glm-4v-flash"]
             
             logger.info(f"[GLM Vision] Plugin initialized successfully with model: {self.config['model']}")
             
@@ -66,6 +70,20 @@ class GLMVision(Plugin):
         if context.type == ContextType.TEXT:
             # 处理文本消息，查找URL
             text = context.content.strip()
+            
+            # 检查是否是切换模型的指令
+            if any(kw in text for kw in self.keywords["switch_model"]):
+                # 提取模型名称
+                for model in self.supported_models:
+                    if model in text:
+                        self._switch_model(model, e_context)
+                        return
+                # 如果没有指定具体模型，显示当前模型和可用选项
+                reply_text = f"当前模型：{self.config['model']}\n可选模型：{', '.join(self.supported_models)}\n使用方法：切换识图模型 模型名称"
+                reply = Reply(ReplyType.TEXT, reply_text)
+                e_context['reply'] = reply
+                e_context.action = EventAction.BREAK_PASS
+                return
             
             # 检查是否包含关键词
             is_image = any(kw in text for kw in self.keywords["image"])
@@ -232,6 +250,44 @@ class GLMVision(Plugin):
             logger.error(f"[GLM Vision] API call error: {e}")
             raise
 
+    def _switch_model(self, new_model, e_context):
+        """切换视觉模型"""
+        if new_model not in self.supported_models:
+            reply = Reply(ReplyType.TEXT, f"不支持的模型：{new_model}\n可选模型：{', '.join(self.supported_models)}")
+            e_context['reply'] = reply
+            e_context.action = EventAction.BREAK_PASS
+            return
+            
+        try:
+            # 获取配置文件路径
+            curdir = os.path.dirname(__file__)
+            config_path = os.path.join(curdir, "config.json")
+            
+            # 读取当前配置
+            with open(config_path, "r", encoding="utf-8") as f:
+                config = json.load(f)
+            
+            # 更新模型
+            old_model = config["api"]["model"]
+            config["api"]["model"] = new_model
+            
+            # 保存配置
+            with open(config_path, "w", encoding="utf-8") as f:
+                json.dump(config, f, indent=4, ensure_ascii=False)
+            
+            # 更新运行时配置
+            self.config["model"] = new_model
+            
+            reply = Reply(ReplyType.TEXT, f"已将视觉模型从 {old_model} 切换为 {new_model}")
+            e_context['reply'] = reply
+            e_context.action = EventAction.BREAK_PASS
+            
+        except Exception as e:
+            logger.error(f"[GLM Vision] Failed to switch model: {e}")
+            reply = Reply(ReplyType.TEXT, f"切换模型失败：{str(e)}")
+            e_context['reply'] = reply
+            e_context.action = EventAction.BREAK_PASS
+
     def get_help_text(self, **kwargs):
         help_text = """智谱AI视觉分析插件使用说明：
 
@@ -241,8 +297,12 @@ class GLMVision(Plugin):
 2. 分析视频：
    发送"智谱识视频 [视频URL]"或"分析视频 [视频URL]"或"看视频 [视频URL]"
 
+3. 切换视觉模型：
+   发送"切换识图模型 [模型名称]"或"切换视觉模型 [模型名称]"
+   支持的模型：{}
+
 图片要求：
-- 支持格式：jpg、png、jpeg
+- 支持格式：jpg, jpeg, png
 - 大小限制：{}MB
 - 最大像素：{}像素
 
@@ -252,6 +312,7 @@ class GLMVision(Plugin):
 - 时长限制：{}秒
 
 注意：请确保提供的URL可以直接访问媒体文件""".format(
+            ", ".join(self.supported_models),
             self.config["image_max_size"],
             self.config["image_max_pixels"],
             self.config["video_max_size"],
