@@ -2,7 +2,11 @@
 
 GLM_vision 是一款适用于 chatgpt-on-wechat 的图像和视频分析插件，基于智谱GLM-4V视觉模型，支持通过URL链接分析图片和视频内容。
 
-智谱GLM-4V体验地址: https://open.bigmodel.cn/
+智谱的多模态模型GLM-4V-FLASH最近全面免费开放。同时本人跟着WaytoAGI的共学教程也申请到了智谱AI平台的多个模型免费资源包，内含charglm-3、glm-4-air、glm-4-plus、glm-4v-plus等多个高智能对话模型和多模态模型的token 300万至5000万不等，有效期一个月。
+
+本着不浪费资源的原则，于是就有了这个基于智谱多模态模型识别图片和视频的插件。
+
+智谱GLM-4V-PLUS体验地址: https://open.bigmodel.cn/console/trialcenter?modelCode=glm-4v-plus
 
 该插件使用起来非常简单，只需按以下步骤操作即可。
 
