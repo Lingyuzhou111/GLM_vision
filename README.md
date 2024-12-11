@@ -23,7 +23,7 @@ GLM_vision 是一款适用于 chatgpt-on-wechat 的图像和视频分析插件�
    ```
    pip install -r requirements.txt
    ```
-3. 配置 config.json 文件，需要设置以下参数：
+3. 配置 config.json 文件，仅需填写你在第一步获取的key，其他默认即可：
    ```json
    {
      "api": {
