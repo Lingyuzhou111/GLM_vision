@@ -19,8 +19,9 @@ GLM_vision 是一款适用于 chatgpt-on-wechat 的图像和视频分析插件�
    ```
    #installp https://github.com/Lingyuzhou111/GLM_vision.git
    ```
+2. 安装依赖：在插件目录打开终端，输入指令pip install -r requirements.txt，等待安装完成
 
-2. 配置 config.json 文件，需要设置以下参数：
+3. 配置 config.json 文件，需要设置以下参数：
    ```json
    {
      "api": {
@@ -41,11 +42,11 @@ GLM_vision 是一款适用于 chatgpt-on-wechat 的图像和视频分析插件�
    }
    ```
 
-3. 重启 chatgpt-on-wechat 项目
+4. 重启 chatgpt-on-wechat 项目
 
-4. 在微信机器人聊天窗口输入 #scanp 命令扫描新插件
+5. 在微信机器人聊天窗口输入 #scanp 命令扫描新插件
 
-5. 输入 #help GLM_vision 查看帮助信息，确认插件安装成功
+6. 输入 #help GLM_vision 查看帮助信息，确认插件安装成功
 
 ### 三. 使用说明
 1. 分析图片：
