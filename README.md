@@ -19,8 +19,10 @@ GLM_vision 是一款适用于 chatgpt-on-wechat 的图像和视频分析插件�
    ```
    #installp https://github.com/Lingyuzhou111/GLM_vision.git
    ```
-2. 安装依赖：在插件目录打开终端，输入指令pip install -r requirements.txt，等待安装完成
-
+2. 安装必要的依赖：在GLM_vision插件目录打开终端，输入以下指令，等待安装完成
+   ```
+   pip install -r requirements.txt
+   ```
 3. 配置 config.json 文件，需要设置以下参数：
    ```json
    {
