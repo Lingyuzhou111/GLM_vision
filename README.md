@@ -11,7 +11,7 @@ GLM_vision 是一款适用于 chatgpt-on-wechat 的图像和视频分析插件�
 该插件使用起来非常简单，只需按以下步骤操作即可。
 
 ## 插件更新日志
-20241211——增加自定义切换识图模型的指令，示例：切换视觉模型 glm-4v-flash /切换识图模型 glm-4v-plus
+20241211——增加自定义切换识图模型的指令，示例：切换识图模型 glm-4v-flash /切换视觉模型 glm-4v-plus
 
 ### 一. 获取API密钥
 1. 注册并登录智谱AI开放平台 https://open.bigmodel.cn/
